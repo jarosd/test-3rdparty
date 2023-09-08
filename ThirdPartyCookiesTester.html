@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+    <head>
+
+    </head>
+    <body>
+        test
+<!-- https://medium.com/devscollab/detecting-whether-3rd-party-cookies-are-enabled-or-not-in-javascript-4328715a527b -->
+        <script type="text/javascript">
+        const checkCookiesEnable = () => {
+            console.error("started checkcookies");
+            let isCookieEnabled = window.navigator.cookieEnabled;
+            if (typeof window.navigator.cookieEnabled === "undefined" && !isCookieEnabled) {
+                document.cookie = "testcookie";
+                isCookieEnabled = document.cookie.indexOf("testcookie") !== -1;
+            }
+
+            return isCookieEnabled;
+        }
+
+        (function () {
+            console.error("adding listener");
+            window.addEventListener('message', event => {
+                try {
+                    console.error("started listener method");
+                    let data = JSON.parse(event.data)
+                    if (data['test'] !== 'cookie')
+                        return
+                    let result = checkCookiesEnable()
+                    parent.postMessage(JSON.stringify({
+                        'result': result
+                    }), event.origin);
+                }
+                catch (e) {
+                    console.error(e);
+                }
+            });
+        })();
+        </script>
+    </body>
+</html>
