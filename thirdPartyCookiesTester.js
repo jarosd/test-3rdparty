@@ -1,4 +1,4 @@
-// script logic is retrieved from: https://medium.com/devscollab/detecting-whether-3rd-party-cookies-are-enabled-or-not-in-javascript-4328715a527b -->
+// script logic is retrieved from: https://medium.com/devscollab/detecting-whether-3rd-party-cookies-are-enabled-or-not-in-javascript-4328715a527b
 // modified for our purposes
 
 const checkCookiesEnabled = () => {
